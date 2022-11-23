@@ -25,7 +25,7 @@ func maincode() {
     case "1" :
         addStudent()
     case "2" :
-        print("2")
+        removeStudent()
     case "3":
         print("3")
     case "4":
@@ -52,10 +52,18 @@ func addStudent() {
     guard !studentList.contains(insert) else{ print("\(insert)는 이미 존재하는 학생입니다. 추가하지 않습니다."); return }
     studentList.append(insert)
     print("\(insert) 학생을 추가했습니다.")
-    print(studentList)
 }
 
 
 // ⭐ 2번 기능. 학생삭제를 작성합니다.
-// 2-1 
-// 2-2
+// 2-1 메뉴를 선택한 후에도 잘못 입력한 것이 있으면 처리해 주어야합니다. (nil, 공백)
+// 2-2 없는 학생은 삭제하지 않습니다.
+func removeStudent() {
+    print("삭제할 학생의 이름을 입력해주세요")
+    guard let insert = readLine() else{ print("입력이 잘못되었습니다. 다시 확인해주세요."); return }
+    guard !insert.isEmpty else{ print("입력이 잘못되었습니다. 다시 확인해주세요."); return }
+    guard !insert.contains(" ") else{ print("입력이 잘못되었습니다. 다시 확인해주세요."); return }
+    guard studentList.contains(insert) else{ print("\(insert) 학생을 찾지 못했습니다."); return }
+    studentList.remove(at: studentList.firstIndex(of: "\(insert)")!)
+    print("\(insert) 학생을 삭제하였습니다.")
+}
